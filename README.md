@@ -49,7 +49,53 @@ backend/
 │── .env
 ```
 ---
+# Architecture Diagram
 
+```markdown
++-------------------+        +--------------------+        +----------------------+
+|                   |        |                    |        |                      |
+|   React Frontend  | -----> |   FastAPI Backend | ----->  |   LangChain (RAG)    |
+|                   |        |                    |        |                      |
++-------------------+        +--------------------+        +----------+-----------+
+                                                                  |
+                                                                  |
+                                                     +------------+------------+
+                                                     |                         |
+                                                     |                         |
+                                          +----------v----------+   +----------v----------+
+                                          |     FAISS DB        |   |   Gemini 2.5 Flash  |
+                                          |  (Vector Search)    |   |      (LLM)          |
+                                          +---------------------+   +---------------------+
+```
+
+---
+# Models Used
+```
+Gemini LLM (Text Generation)
+Model: gemini-2.5-flash
+Use: Generates responses for feedback analysis
+Why: Fast, cost-efficient, and suitable for real-time applications
+```
+```
+Embedding Model (Vector Search)
+Model: gemini-embedding-001
+Use: Converts text into numerical vectors for similarity search (RAG)
+Why: High-quality embeddings for accurate retrieval using FAISS
+
+```
+# How They Work Together
+```
+User input → converted to embeddings (gemini-embedding-001)
+FAISS retrieves similar past feedback
+Context + input → sent to Gemini (gemini-2.5-flash)
+Model generates structured response
+```
+**Where It’s Used in Code**
+```
+LLM → config.py
+Embeddings → rag/embedder.py
+```
+---
 ### 2. Create Virtual Environment
 ```
 python -m venv venv
