@@ -46,7 +46,10 @@ backend/
 │ ├── vector_store.py
 │── prompts/
 │ ├── feedback_prompt.py
+│── requirements.txt
+│── .gitignore
 │── .env
+│── README.md
 ```
 ---
 # Architecture Diagram
