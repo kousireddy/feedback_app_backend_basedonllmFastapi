@@ -126,6 +126,9 @@ http://127.0.0.1:8000/
 ---
 # Output
 ---
+```
+Go to -> http://127.0.0.1:8000/docs/
+```
 ![Server](./screenshots/s1.png)
 ![API CHECK](./screenshots/s2.png)
 ![POST Try it out](./screenshots/s3.png)
